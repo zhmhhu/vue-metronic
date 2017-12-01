@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Tree Page'" :small-title="'Example Tree Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -8,13 +9,14 @@
             </m-portlet>
             <m-portlet :title="'CheckBoxTree'" :color-type="4">
                 <m-button @click="treeData2 = treeData3">change</m-button>
-                <m-Tree :tree-data="treeData2" :callback="treeTest" :checkbox="true" :result.sync="result"></m-Tree>
+                <m-Tree :tree-data="treeData2" :callback="treeTest" :checkbox="true" :result="result"></m-Tree>
                 <div v-for="r in result">
                     {{r.code}}
                 </div>
             </m-portlet>
         </div>
         
+    </div>
     </div>
 </template>
 <script>

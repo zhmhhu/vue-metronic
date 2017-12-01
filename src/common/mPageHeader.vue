@@ -1,4 +1,5 @@
 <template>
+<div>
     <!-- BEGIN PAGE HEAD-->
     <div class="page-head">
         <!-- BEGIN PAGE TITLE -->
@@ -22,6 +23,7 @@
         </li>
     </ul>
     <!-- BEGIN PAGE CONTENT-->
+    </div>
 </template>
 <script>
     export default {

@@ -1,14 +1,16 @@
 <template>
+<div>
     <m-page-header :title="'Example Table Page'" :small-title="'Example Table Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
             <m-portlet :title="'NomalTable'" :color-type="5">
-                <m-table :colums="colums" :table-data="tableData" :check-colum="true" :check-result.sync="checkResult"></m-table>
-                <m-page :total-count="totalCount" :now-page.sync="nowPage"></m-page>
+                <m-table :colums="colums" :table-data="tableData" :check-colum="true" :check-result="checkResult"></m-table>
+                <m-page :total-count="totalCount" :now-page="nowPage"></m-page>
                 {{checkResult}}
             </m-portlet>
         </div>
     </div>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';

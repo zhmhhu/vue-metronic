@@ -5,10 +5,10 @@ import './components/componentsCss';
 
 Vue.use(VueRouter);
 
-const router = new VueRouter();
+const router = new VueRouter({
+    routes: routerMap
+});
 
-routerMap(router);
-
-let app = Vue.extend({});
-
-router.start(app, '#app');
+new Vue({
+    router
+}).$mount('#app');

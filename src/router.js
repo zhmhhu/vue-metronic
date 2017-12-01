@@ -10,64 +10,58 @@ import ExampleTable from './example/example_table';
 import ExampleChart from './example/example_chart';
 import ExampleCheckbox from './example/example_checkbox';
 import Doc from './example/doc.vue';
-export default function (router) {
-    router.map({
-        '/': {
-            name: 'app',
-            component: App,
-            subRoutes: {
-                '/buttons': {
-                    name: 'buttons',
-                    component: ExampleButton
-                }
-            }
-        },
-        '/doc': {
-            name: 'doc',
-            component: Doc,
-            subRoutes: {
-                '/buttons': {
-                    name: 'buttons',
-                    component: ExampleButton
-                },
-                '/portlet': {
-                    name: 'portlet',
-                    component: ExamplePortlet
-                },
-                '/alert': {
-                    name: 'alert',
-                    component: ExampleAlert
-                },
-                '/modal': {
-                    name: 'modal',
-                    component: ExampleModal
-                },
-                '/select': {
-                    name: 'select',
-                    component: ExampleSelect
-                },
-                '/picker': {
-                    name: 'picker',
-                    component: ExamplePicker
-                },
-                '/tree': {
-                    name: 'tree',
-                    component: ExampleTree
-                },
-                '/table': {
-                    name: 'table',
-                    component: ExampleTable
-                },
-                '/chart': {
-                    name: 'chart',
-                    component: ExampleChart
-                },
-                '/checkbox': {
-                    name: 'checkbox',
-                    component: ExampleCheckbox
-                }
-            }
-        }
 
-    });
-}
+export default [{
+    path: '/',
+    name: 'app',
+    component: App,
+    children: [{
+        path: '/buttons',
+        component: ExampleButton
+    }]
+}, {
+    path: '/doc',
+    name: 'doc',
+    component: Doc,
+    children: [{
+        path: '/buttons',
+        name: 'buttons',
+        component: ExampleButton
+    }, {
+        path: '/portlet',
+        name: 'portlet',
+        component: ExamplePortlet
+    }, {
+        path: '/alert',
+        name: 'alert',
+        component: ExampleAlert
+    }, {
+        path: '/modal',
+        name: 'modal',
+        component: ExampleModal
+    }, {
+        path: '/select',
+        name: 'select',
+        component: ExampleSelect
+    }, {
+        path: '/picker',
+        name: 'picker',
+        component: ExamplePicker
+    }, {
+        path: '/tree',
+        name: 'tree',
+        component: ExampleTree
+    }, {
+        path: '/table',
+        name: 'table',
+        component: ExampleTable
+    }, {
+        path: '/chart',
+        name: 'chart',
+        component: ExampleChart
+    }, {
+        path: '/checkbox',
+        name: 'checkbox',
+        component: ExampleCheckbox
+    }]
+}];

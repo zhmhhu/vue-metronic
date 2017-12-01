@@ -1,5 +1,10 @@
+# 更新
+##  2017-12-01
+vue升级为2.0版，部分bug待修复
+
+
 # vue-metronic
-vue版metronic，自己造轮子中,正在制作中会逐步更新
+vue版metronic
 
 #安装命令
 npm install

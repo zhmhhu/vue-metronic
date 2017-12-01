@@ -1,6 +1,6 @@
 <template>
     <div id="tree_1" class="tree-demo jstree jstree-1 jstree-default" :class="{'jstree-checkbox-selection':checkbox}">
-        <tree-content :tree-data="treeData" :callback="callback" :checkbox="checkbox" :result.sync="result"></tree-content>
+        <tree-content :tree-data="treeData" :callback="callback" :checkbox="checkbox" :result="result"></tree-content>
     </div>
 </template>
 <script>

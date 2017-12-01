@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Checkbox Page'" :small-title="'Example Checkbox Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -21,6 +22,7 @@
             </m-portlet>
         </div>
     </div>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';

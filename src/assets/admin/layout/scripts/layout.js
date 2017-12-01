@@ -438,7 +438,7 @@ var Layout = function () {
     return {
 
         //main function to initiate the theme
-        init: function () {
+        beforeCreate: function () {
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //layout handlers

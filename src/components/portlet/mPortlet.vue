@@ -23,7 +23,7 @@
                 </a>
             </div>
         </div>
-        <div class="portlet-body" :class="{'fullbody': fullscreen}" v-show="show" v-el:body>
+        <div class="portlet-body" :class="{'fullbody': fullscreen}" v-show="show" ref="body">
             <slot></slot>
         </div>
     </div>

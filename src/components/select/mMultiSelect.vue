@@ -1,9 +1,10 @@
 <template>
-    <span class="select2 select2-container select2-container--bootstrap select2-container--below" :class="[selectClass, {'select2-container--focus': active, 'select2-container--open': open}]" v-el:container>
+<div>
+    <span class="select2 select2-container select2-container--bootstrap select2-container--below" :class="[selectClass, {'select2-container--focus': active, 'select2-container--open': open}]" ref="container">
         <span class="selection">
         <span class="select2-selection select2-selection--multiple" @click.stop="openSelect">
             <ul class="select2-selection__rendered">
-                <li class="select2-selection__choice" v-for="r in result" title="{{r.name}}">
+                <li class="select2-selection__choice" v-for="r in result" v-bind:title="r.name">
                     <span class="select2-selection__choice__remove" @click.stop="deleteValue(r)">×</span>{{r.name}}
                 </li>
                 <!-- <li class="select2-search select2-search--inline">
@@ -11,11 +12,12 @@
                 </li> -->
             </ul>
         </span>
-    </span>
-    <span class="select2-container select2-container--bootstrap select2-container--open s-show" v-show="open" v-el:drop>
+        </span>
+     </span>
+    <span class="select2-container select2-container--bootstrap select2-container--open s-show" v-show="open" ref="drop">
         <span class="select2-dropdown select2-dropdown--below">
             <span class="select2-results">
-            <ul class="select2-results__options" v-el:ul>
+            <ul class="select2-results__options" ref="ul">
                 <li class="select2-results__option" aria-selected="false" v-for="d in data" @mouseover="mouseover($event)" @mouseout="mouseout($event)" @click.stop="valueSelect(d)">
                     {{d.name}}
                 </li>
@@ -23,6 +25,7 @@
             </span>
         </span>
     </span>
+</div>
 </template>
 <script>
     import EventListener from '../util/eventListener';
@@ -55,7 +58,7 @@
                 }
             };
         },
-        ready () {
+        mounted () {
             this._closeEvent = EventListener.listen(window, 'click', (e) => {
                 if (!this.$el.contains(e.target)) {
                     this.open = false;
@@ -74,12 +77,12 @@
                     this.open = true;
                     this.active = true;
                     this.filterStr = '';
-                    this.$els.drop.style.width = this.$els.container.offsetWidth + 'px';
+                    this.$refs.drop.style.width = this.$refs.container.offsetWidth + 'px';
                     for (var index in this.data) {
-                        this.$els.ul.children[index].attributes[1].value = false;
+                        this.$refs.ul.children[index].attributes[1].value = false;
                         for (var r in this.result) {
                             if (this.data[index].code === this.result[r].code) {
-                                this.$els.ul.children[index].attributes[1].value = true;
+                                this.$refs.ul.children[index].attributes[1].value = true;
                                 break;
                             }
                         }

@@ -257,7 +257,7 @@ var Demo = function () {
     return {
 
         //main function to initiate the theme
-        init: function() {
+        beforeCreate: function() {
             // handles style customer tool
             handleTheme(); 
 

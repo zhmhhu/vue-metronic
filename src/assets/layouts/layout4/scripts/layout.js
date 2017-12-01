@@ -472,7 +472,7 @@ var Layout = function() {
             handleGoTop(); //handles scroll to top functionality in the footer
         },
 
-        init: function () {            
+        beforeCreate: function () {            
             this.initHeader();
             this.initSidebar();
             this.initContent();

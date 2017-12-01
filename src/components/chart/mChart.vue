@@ -1,5 +1,5 @@
 <template>
-    <div v-el:echarts style="width: 100%;height: 400px;"></div>
+    <div ref="echarts" style="width: 100%;height: 400px;"></div>
 </template>
 <script>
     import echarts from 'echarts/lib/echarts';
@@ -15,7 +15,7 @@
                 type: Object
             }
         },
-        ready () {
+        mounted () {
             this.init();
         },
         watch: {
@@ -24,8 +24,8 @@
             }
         },
         methods: {
-            init () {
-                var myChart = echarts.init(this.$els.echarts);
+            beforeCreate () {
+                var myChart = echarts.init(this.$refs.echarts);
                 // 绘制图表
                 window.console.log(this.option);
                 myChart.setOption({

@@ -1,14 +1,14 @@
 <template>
     <ul :class="{'jstree-container-ul':type === 'root', 'jstree-children':type === 'child'}">
-        <li class="jstree-node" :class="{'jstree-leaf':td.nodes? false: true,'jstree-open':td.nodes? true: false, 'jstree-last':treeData.length === $index + 1}" v-for="td in treeData" >
+        <li class="jstree-node" :class="{'jstree-leaf':td.nodes? false: true,'jstree-open':td.nodes? true: false, 'jstree-last':treeData.length === index + 1}" v-for="(td,index) in treeData" >
             <i class="jstree-icon jstree-ocl" @click.stop="treeToggle($event)"></i>
-              <a class="jstree-anchor" :class="{'jstree-clicked': (!checkbox  && currentActive + $index === currentclick) || (checkbox && td.checked)}" href="javascript:;" @click="treeClick(td, $index, $event)" @mouseout="mouseout($event)" @mouseover="mouseover($event)">
+              <a class="jstree-anchor" :class="{'jstree-clicked': (!checkbox  && currentActive + index === currentclick) || (checkbox && td.checked)}" href="javascript:;" @click="treeClick(td, index, $event)" @mouseout="mouseout($event)" @mouseover="mouseover($event)">
                     <i class="jstree-icon jstree-checkbox" v-if="checkbox"></i>
                     <i class="jstree-icon jstree-themeicon fa jstree-themeicon-custom" :class="{'fa-file icon-state-info':td.nodes? false: true,'fa-folder icon-state-warning':td.nodes? true: false, 'icon-lg': type === 'root'}"></i>
                 {{td.name}}
             </a>
-            <item v-if="td.nodes && !checkbox" :tree-data="td.nodes" :type="'child'" :callback="callback" :current-active="currentActive + $index" :currentclick.sync="currentclick"></item>
-            <item v-if="td.nodes && checkbox" :tree-data="td.nodes" :type="'child'" :callback="callback" :current-active="currentActive + $index" :currentclick="currentclick" :checkbox="true" :result.sync="result"></item>
+            <item v-if="td.nodes && !checkbox" :tree-data="td.nodes" :type="'child'" :callback="callback" :current-active="currentActive + index" :currentclick="currentclick"></item>
+            <item v-if="td.nodes && checkbox" :tree-data="td.nodes" :type="'child'" :callback="callback" :current-active="currentActive + index" :currentclick="currentclick" :checkbox="true" :result="result"></item>
         </li>
     </ul>
 </template>

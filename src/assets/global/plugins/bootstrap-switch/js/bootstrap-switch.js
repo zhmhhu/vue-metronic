@@ -480,7 +480,7 @@
         return initInterval = window.setInterval((function(_this) {
           return function() {
             if (_this.$wrapper.is(":visible")) {
-              init();
+              beforeCreate();
               return window.clearInterval(initInterval);
             }
           };

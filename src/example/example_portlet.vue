@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Portlet Page'" :small-title="'Example Portlet Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -25,7 +26,8 @@
             </m-portlet>
         </div>
     </div>
-    <m-alert :position="position.code" :color-type="colorType.code" :title="'哈哈哈'" :show.sync="aShow" :effect="effect.code"></m-alert>
+    <m-alert :position="position.code" :color-type="colorType.code" :title="'哈哈哈'" :show="aShow" :effect="effect.code"></m-alert>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';

@@ -56,8 +56,8 @@
                         <p @click="switchDecadeView">{{stringifyYearHeader(currDate)}}</p>
                     </div>
                     <div class="datepicker-monthRange">
-                        <template v-for="m in monthNames">
-                            <span v-bind:class="{'datepicker-dateRange-item-active': (this.monthNames[this.parse(this.value).getMonth()]  === m) && this.currDate.getFullYear() === this.parse(this.value).getFullYear()}" @click="monthSelect($index)">{{m.substr(0,3)}}</span>
+                        <template v-for="(m,i) in monthNames">
+                            <span v-bind:class="{'datepicker-dateRange-item-active': (this.monthNames[this.parse(this.value).getMonth()]  === m) && this.currDate.getFullYear() === this.parse(this.value).getFullYear()}" @click="monthSelect(i)">{{m.substr(0,3)}}</span>
                         </template>
                     </div>
                 </div>

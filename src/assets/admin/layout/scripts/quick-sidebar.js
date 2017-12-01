@@ -162,7 +162,7 @@ var QuickSidebar = function () {
 
     return {
 
-        init: function () {
+        beforeCreate: function () {
             //layout handlers
             handleQuickSidebarToggler(); // handles quick sidebar's toggler
             handleQuickSidebarChat(); // handles quick sidebar's chats

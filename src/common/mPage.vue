@@ -1,6 +1,6 @@
 <template>
 <div class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-md" :class="{'page-sidebar-closed': toggler}">
-    <div class="page-header navbar navbar-fixed-top" v-el:header>
+    <div class="page-header navbar navbar-fixed-top" ref="header">
         <!-- BEGIN HEADER INNER -->
         <div class="page-header-inner">
             <!-- BEGIN LOGO -->
@@ -78,16 +78,16 @@
                         </div>
                         <!-- END SIDEBAR TOGGLER BUTTON -->
                     </li>
-                    <li class="nav-item" v-for="(i, m) in menus" :class="{'active': i == subMenu}">
+                    <li class="nav-item" v-for="(m,i) in menus" :class="{'active': i == subMenu}">
                         <a href="javascript:;" @click="menuClick(i, m)">
-                        <i class="{{m.icon}}"></i>
+                        <i v-bind:class="m.icon"></i>
                         <span class="title">{{m.name}}</span>
                         <span class="arrow" v-if="m.subMenu.length > 0" :class="{'open': i == subMenu}"></span>
                         </a>
                         <ul class="sub-menu animated" v-if="m.subMenu.length > 0" v-show="i == subMenu" transition="fade">
-                            <li v-for="(si, ms) in m.subMenu">
+                            <li v-for="(ms, si) in m.subMenu">
                                 <a href="javascript:;" @click="menuClick(i, m, ms)">
-                                <i class="{{ms.icon}}"></i>
+                                <i v-bind:class="ms.icon"></i>
                                 {{ms.name}}</a>
                             </li>
                         </ul>
@@ -99,7 +99,7 @@
         <!-- END SIDEBAR -->
         <!-- BEGIN CONTENT -->
         <div class="page-content-wrapper">
-            <div class="page-content" v-el:content >
+            <div class="page-content" ref="content" >
                 <router-view></router-view>
             </div>
         </div>
@@ -107,7 +107,7 @@
     </div>
     <!-- END CONTAINER --> 
     <!-- BEGIN FOOTER -->
-    <div class="page-footer" v-el:footer>
+    <div class="page-footer" ref="footer">
         <div class="page-footer-inner"> 2016 &copy; Metronic Theme By
             <a target="_blank" href="http://keenthemes.com">Keenthemes</a> &nbsp;|&nbsp;
             <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
@@ -150,12 +150,12 @@
                 if (url.includes('http') || url.includes('https')) {
                     window.location.href = url;
                 } else {
-                    this.$route.router.go({name: url});
+                    this.$router.push({name: url});
                 }
             },
             autoHegiht () {
-                let contentHeight = this.$els.footer.offsetTop - this.$els.header.offsetHeight;
-                this.$els.content.style.minHeight = contentHeight + 'px';
+                let contentHeight = this.$refs.offsetTop - this.$refs.header.offsetHeight;
+                this.$refs.content.style.minHeight = contentHeight + 'px';
             }
         },
         transitions: {
@@ -164,7 +164,7 @@
                 leaveClass: 'fadeOut'
             }
         },
-        ready () {
+        mounted () {
             this.autoHegiht();
             this._resizeEvent = EventListener.listen(window, 'resize', (e) => {
                 this.autoHegiht();

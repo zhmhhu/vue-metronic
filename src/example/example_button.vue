@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Button Page'" :small-title="'Example Button Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -65,6 +66,7 @@
             </m-portlet>
         </div>
     </div>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';

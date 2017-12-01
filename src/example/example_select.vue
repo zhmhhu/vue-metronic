@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Select Page'" :small-title="'Example Select Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -7,31 +8,31 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">单选框</label>
                         <div class="col-md-9">
-                            <m-select :data="sData" :result.sync="sResult1" :size="'large'" :label="'超大下拉选择：'"></m-select>
+                            <m-select :data="sData" :result="sResult1" :size="'large'" :label="'超大下拉选择：'"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">单选框</label>
                         <div class="col-md-9">
-                            <m-select :data="sData" :result.sync="sResult2" :label="'正常下拉选择：'"></m-select>
+                            <m-select :data="sData" :result="sResult2" :label="'正常下拉选择：'"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">单选框</label>
                         <div class="col-md-9">
-                            <m-select :data="sData" :result.sync="sResult3" :size="'small'" :label="'小型下拉选择：'"></m-select>
+                            <m-select :data="sData" :result="sResult3" :size="'small'" :label="'小型下拉选择：'"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">单选框</label>
                         <div class="col-md-9">
-                            <m-select :data="sData" :result.sync="sResult4" :size="'xsmall'" :label="'超小下拉选择：'"></m-select>
+                            <m-select :data="sData" :result="sResult4" :size="'xsmall'" :label="'超小下拉选择：'"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">多选框</label>
                         <div class="col-md-9">
-                            <m-multi-select :data="sData" :result.sync="sResult5"></m-multi-select>
+                            <m-multi-select :data="sData" :result="sResult5"></m-multi-select>
                         </div>
                     </div>
                 </form>
@@ -43,6 +44,7 @@
             </m-portlet>
         </div>
     </div>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';

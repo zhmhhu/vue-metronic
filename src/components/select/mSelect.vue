@@ -1,21 +1,21 @@
 <template>
 <span>
-    <span class="select2 select2-container select2-container--bootstrap select2-container--below " :class="[selectClass, {'select2-container--focus': active, 'select2-container--open': open}]" v-el:container>
+    <span class="select2 select2-container select2-container--bootstrap select2-container--below " :class="[selectClass, {'select2-container--focus': active, 'select2-container--open': open}]" ref="container">
         <span class="selection">
             <span class="select2-selection select2-selection--single" @click.stop="openSelect">
-                <span class="select2-selection__rendered" title="{{selectName}}">{{result.name}}</span>
+                <span class="select2-selection__rendered" v-bind:title="selectName">{{result.name}}</span>
                 <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
             </span>
         </span>
         <span class="dropdown-wrapper"></span>
     </span>
-    <span class="select2-container select2-container--bootstrap select2-container--open s-show" v-show="open" v-el:drop>
+    <span class="select2-container select2-container--bootstrap select2-container--open s-show" v-show="open" ref="drop">
         <span class="select2-dropdown select2-dropdown--below">
             <span class="select2-search select2-search--dropdown">
                 <input class="select2-search__field" type="search" v-model="filterStr">
             </span>
             <span class="select2-results">
-            <ul class="select2-results__options" v-el:ul>
+            <ul class="select2-results__options" ref="ul">
                 <li class="select2-results__option" aria-selected="false" v-for="d in sData" @mouseover="mouseover($event)" @mouseout="mouseout($event)" @click.stop="valueSelect(d)">
                     {{d.name}}
                 </li>
@@ -60,7 +60,7 @@
                 }
             };
         },
-        ready () {
+        mounted () {
             this.sData = this.data;
             this._closeEvent = EventListener.listen(window, 'click', (e) => {
                 if (!this.$el.contains(e.target)) {
@@ -81,11 +81,11 @@
                     this.open = true;
                     this.active = true;
                     this.filterStr = '';
-                    this.$els.drop.style.width = this.$els.container.offsetWidth + 'px';
+                    this.$refs.drop.style.width = this.$refs.container.offsetWidth + 'px';
                     for (var index in this.sData) {
                         if (this.sData[index] === this.result) {
-                            this.$els.ul.children[index].attributes[1].value = true;
-                            this.currentLi = this.$els.ul.children[index];
+                            this.$refs.ul.children[index].attributes[1].value = true;
+                            this.currentLi = this.$refs.ul.children[index];
                             break;
                         }
                     }

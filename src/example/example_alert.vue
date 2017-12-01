@@ -1,4 +1,5 @@
 <template>
+<div>
     <m-page-header :title="'Example Alert Page'" :small-title="'Example Alert Page'"></m-page-header>
     <div class="row">
         <div class="col-md-12">
@@ -7,19 +8,19 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">方位：</label>
                         <div class="col-md-9">
-                            <m-select :data="positionData" :result.sync="position"></m-select>
+                            <m-select :data="positionData" :result="position"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">颜色：</label>
                         <div class="col-md-9">
-                            <m-select :data="colorTypeData" :result.sync="colorType"></m-select>
+                            <m-select :data="colorTypeData" :result="colorType"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">动画：</label>
                         <div class="col-md-9">
-                            <m-select :data="effectData" :result.sync="effect"></m-select>
+                            <m-select :data="effectData" :result="effect"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,13 +35,14 @@
             <m-portlet :title="'Alert API'">
                 <div >
                     <h4>用法：</h4>
-                    <p>&lt;m-alert :position="'topRight'" :color-type="'error'" :title="'哈哈哈'" :show.sync="aShow" :effect="'slide'"&gt;&lt;/m-alert&gt;</p>
+                    <p>&lt;m-alert :position="'topRight'" :color-type="'error'" :title="'哈哈哈'" :show="aShow" :effect="'slide'"&gt;&lt;/m-alert&gt;</p>
                     <m-table :colums="colums" :table-data="tableData"></m-table>
                 </div>
             </m-portlet>
         </div>
     </div>
     <m-alert :position="position.code" :color-type="colorType.code" :title="'哈哈哈'" :show="aShow" :effect="effect.code"></m-alert>
+</div>
 </template>
 <script>
     import mPageHeader from '../common/mPageHeader';
