@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-12">
             <m-portlet :title="'Picker'" :color-type="5">
-                <m-datepicker :format="'yyyy-MM-dd'" :value="dateValue" :clean-Button="true"></m-datepicker>
-                <div>{{dateValue}}</div>
+                <m-datepicker :format="'yyyy-MM-dd'" :value="dateValue" :clean-Button="true" @on-value-change="onValueChange"></m-datepicker>
+                <div>{{value}}</div>
             </m-portlet>
         </div>
         
@@ -20,8 +20,14 @@
         components: { mPageHeader, mPortlet, mDatepicker },
         data () {
             return {
-                dateValue: ''
+                dateValue: '2017-12-01',
+                value: ''
             };
+        },
+        methods: {
+            onValueChange (val) {
+                this.value = val;
+            }
         }
     };
 </script>

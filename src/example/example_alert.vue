@@ -8,25 +8,25 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">方位：</label>
                         <div class="col-md-9">
-                            <m-select :data="positionData" :result="position"></m-select>
+                            <m-select :data="positionData" :result="position" @on-result-change="onResultChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">颜色：</label>
                         <div class="col-md-9">
-                            <m-select :data="colorTypeData" :result="colorType"></m-select>
+                            <m-select :data="colorTypeData" :result="colorType"  @on-result-change="onResultChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">动画：</label>
                         <div class="col-md-9">
-                            <m-select :data="effectData" :result="effect"></m-select>
+                            <m-select :data="effectData" :result="effect"  @on-result-change="onResultChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-9">
-                            <m-button :btn-class="'blue-hoki btn-outline'" @click="alertShow">basic alert</m-button>
+                            <m-button :btn-class="'blue-hoki btn-outline'" @click.stop="alertShow">basic alert</m-button>
                             {{aShow}}
                         </div>
                     </div>
@@ -35,7 +35,7 @@
             <m-portlet :title="'Alert API'">
                 <div >
                     <h4>用法：</h4>
-                    <p>&lt;m-alert :position="'topRight'" :color-type="'error'" :title="'哈哈哈'" :show="aShow" :effect="'slide'"&gt;&lt;/m-alert&gt;</p>
+                    <p>&lt;m-alert :position="'topRight'" :color-type="'error'" :title="'哈哈哈'" :show.sync="aShow" :effect="'slide'"&gt;&lt;/m-alert&gt;</p>
                     <m-table :colums="colums" :table-data="tableData"></m-table>
                 </div>
             </m-portlet>
@@ -95,10 +95,14 @@
                     { name: 'effect', type: 'String', choosen: '1.fade 2.zoom 3.slide', default: 'fade', require: 'false', remark: '滑动动画' },
                     { name: 'title', type: 'String', choosen: '无', default: '提示', require: 'false', remark: '' },
                     { name: 'message', type: 'String', choosen: '无', default: '成功！', require: 'false', remark: '' }
-                ]
+                ],
+                result: ''
             };
         },
         methods: {
+            onResultChange (val) {
+                this.result = val;
+            },
             alertShow () {
                 this.aShow = true;
                 setTimeout(() => {

@@ -26,7 +26,7 @@
             </m-portlet>
         </div>
     </div>
-    <m-alert :position="position.code" :color-type="colorType.code" :title="'哈哈哈'" :show="aShow" :effect="effect.code"></m-alert>
+    <!-- <m-alert :position="position.code" :color-type="colorType.code" :title="'哈哈哈'" :show.sync="aShow" :effect="effect.code"></m-alert> -->
 </div>
 </template>
 <script>

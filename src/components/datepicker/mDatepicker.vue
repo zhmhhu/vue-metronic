@@ -22,9 +22,9 @@
 <template>
     <div class="datepicker">
         <div class="input-group input-medium date date-picker" v-bind:style="{width:width}" @click="inputClick" >
-            <input type="text" class="form-control" v-model="value" readonly="">
+            <input type="text" class="form-control" v-model="myValue" readonly="">
             <span class="input-group-btn" v-if="cleanButton">
-                <button class="btn default date-reset" type="button" @click.stop="value = ''"><i class="fa fa-times"></i></button>
+                <button class="btn default date-reset" type="button" @click.stop="myValue = ''"><i class="fa fa-times"></i></button>
             </span>
             <span class="input-group-btn">
             <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
@@ -39,10 +39,10 @@
                         <p @click="switchMonthView">{{stringifyDayHeader(currDate)}}</p>
                     </div>
                     <div class="datepicker-weekRange">
-                        <span v-for="w in weekRange">{{w}}</span>
+                        <span v-for="w in weekRange" v-bind:key="w.id">{{w}}</span>
                     </div>
                     <div class="datepicker-dateRange">
-                        <span v-for="d in dateRange" v-bind:class="d.sclass" @click="daySelect(d.date,this)">{{d.text}}</span>
+                        <span v-for="d in dateRange" v-bind:key="d.id" v-bind:class="d.sclass" @click="daySelect(d.date,this)">{{d.text}}</span>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="datepicker-monthRange">
                         <template v-for="(m,i) in monthNames">
-                            <span v-bind:class="{'datepicker-dateRange-item-active': (this.monthNames[this.parse(this.value).getMonth()]  === m) && this.currDate.getFullYear() === this.parse(this.value).getFullYear()}" @click="monthSelect(i)">{{m.substr(0,3)}}</span>
+                            <span v-bind:key="m.id" v-bind:class="{'datepicker-dateRange-item-active': (this.monthNames[this.parse(this.myValue).getMonth()]  === m) && this.currDate.getFullYear() === this.parse(this.myValue).getFullYear()}" @click="monthSelect(i)">{{m.substr(0,3)}}</span>
                         </template>
                     </div>
                 </div>
@@ -72,11 +72,8 @@
                         <p>{{stringifyDecadeHeader(currDate)}}</p>
                     </div>
                     <div class="datepicker-monthRange decadeRange">
-                        <template v-for="decade in decadeRange">
-                            <span v-bind:class="{'datepicker-dateRange-item-active':
-                                    this.parse(this.value).getFullYear() === decade.text}"
-                                    @click.stop="yearSelect(decade.text)"
-                                >{{decade.text}}</span>
+                        <template v-for="decade in decadeRange" >
+                            <span v-bind:key="decade.id" v-bind:class="{'datepicker-dateRange-item-active':this.parse(this.myValue).getFullYear() === decade.text}" @click.stop="yearSelect(decade.text)">{{decade.text}}</span>
                         </template>
                     </div>
                 </div>
@@ -126,12 +123,19 @@ export default {
                 '四月', '五月', '六月',
                 '七月', '八月', '九月',
                 '十月', '十一月', '十二月'
-            ]
+            ],
+            myValue: this.value
         };
     },
     watch: {
         currDate () {
             this.getDateRange();
+        },
+        value (val) {
+            this.myValue = val;
+        },
+        myValue (val) {
+            this.$emit('on-value-change', val);
         }
     },
     methods: {
@@ -187,7 +191,7 @@ export default {
                 return false;
             } else {
                 this.currDate = date;
-                this.value = this.stringify(this.currDate);
+                this.myValue = this.stringify(this.currDate);
                 this.displayDayView = false;
             }
         },
@@ -311,8 +315,8 @@ export default {
                     if (week === parseInt(el, 10)) sclass = 'datepicker-item-disable';
                 });
                 if (i === time.day) {
-                    if (this.value) {
-                        const valueDate = this.parse(this.value);
+                    if (this.myValue) {
+                        const valueDate = this.parse(this.myValue);
                         if (valueDate) {
                             if (valueDate.getFullYear() === time.year && valueDate.getMonth() === time.month) {
                                 sclass = 'datepicker-dateRange-item-active';
@@ -340,13 +344,28 @@ export default {
             }
         }
     },
-    ready () {
-        this.$dispatch('child-created', this);
-        this.currDate = this.parse(this.value) || this.parse(new Date());
-        this._closeEvent = EventListener.listen(window, 'click', (e) => {
-            if (!this.$el.contains(e.target)) this.close();
+    mounted: function () {
+        var vm = this;
+        this.$nextTick(function () {
+            // vm.$dispatch('child-created', vm);
+            vm.currDate = vm.parse(vm.myValue) || vm.parse(new Date());
+            vm._closeEvent = EventListener.listen(window, 'click', (e) => {
+                if (!vm.$el.contains(e.target)) vm.close();
+            });
         });
     },
+    created: function () {
+        var vm = this;
+        console.log(vm.myValue);
+        console.log(vm.parse(new Date()));
+    },
+    // ready () {
+    //     this.$dispatch('child-created', this);
+    //     this.currDate = this.parse(this.value) || this.parse(new Date());
+    //     this._closeEvent = EventListener.listen(window, 'click', (e) => {
+    //         if (!this.$el.contains(e.target)) this.close();
+    //     });
+    // },
     beforeDestroy () {
         this._closeEvent.remove();
     }

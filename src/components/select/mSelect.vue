@@ -3,7 +3,7 @@
     <span class="select2 select2-container select2-container--bootstrap select2-container--below " :class="[selectClass, {'select2-container--focus': active, 'select2-container--open': open}]" ref="container">
         <span class="selection">
             <span class="select2-selection select2-selection--single" @click.stop="openSelect">
-                <span class="select2-selection__rendered" v-bind:title="selectName">{{result.name}}</span>
+                <span class="select2-selection__rendered" v-bind:title="selectName">{{myResult.name}}</span>
                 <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
             </span>
         </span>
@@ -57,7 +57,8 @@
                     'input-medium': this.size === 'medium',
                     'input-small': this.size === 'small',
                     'input-xsmall': this.size === 'xsmall'
-                }
+                },
+                myResult: this.result
             };
         },
         mounted () {
@@ -92,7 +93,7 @@
                 }
             },
             valueSelect (data) {
-                this.result = data;
+                this.myResult = data;
                 this.selectName = data.name;
                 this.close = true;
                 if (this.currentLi !== null) this.currentLi.attributes[1].value = false;
@@ -123,6 +124,12 @@
             },
             'data': function (now, old) {
                 this.sData = now;
+            },
+            result (val) {
+                this.myResult = val;
+            },
+            myResult (val) {
+                this.$emit('on-result-change', val);
             }
         }
     };
