@@ -8,25 +8,25 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">方位：</label>
                         <div class="col-md-9">
-                            <m-select :data="positionData" :result="position" @on-result-change="onResultChange"></m-select>
+                            <m-select :data="positionData" :result="position" @on-result-change="onPositionChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">颜色：</label>
                         <div class="col-md-9">
-                            <m-select :data="colorTypeData" :result="colorType"  @on-result-change="onResultChange"></m-select>
+                            <m-select :data="colorTypeData" :result="colorType"  @on-result-change="onColorTypeChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">动画：</label>
                         <div class="col-md-9">
-                            <m-select :data="effectData" :result="effect"  @on-result-change="onResultChange"></m-select>
+                            <m-select :data="effectData" :result="effect"  @on-result-change="onEffectChange"></m-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-9">
-                            <m-button :btn-class="'blue-hoki btn-outline'" @click.stop="alertShow">basic alert</m-button>
+                            <m-button :btn-class="'blue-hoki btn-outline'" @click.native="alertShow">basic alert</m-button>
                             {{aShow}}
                         </div>
                     </div>
@@ -100,8 +100,14 @@
             };
         },
         methods: {
-            onResultChange (val) {
-                this.result = val;
+            onPositionChange (val) {
+                this.position = val;
+            },
+            onColorTypeChange (val) {
+                this.colorType = val;
+            },
+            onEffectChange (val) {
+                this.effect = val;
             },
             alertShow () {
                 this.aShow = true;

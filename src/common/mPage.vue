@@ -40,15 +40,20 @@
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user dropdown-dark">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <span class="username username-hide-on-mobile"> Nick </span>
+                                <span class="username username-hide-on-mobile" v-text="'Hello, ' + $store.state.userInfo.nick"> </span>
+
+                                	<!-- <h1 class="nick" v-text="'Hello, ' + $store.state.userInfo.nick"></h1> -->
                                 <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                                <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg" /> </a>
+                                 <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg" /> </a> 
+                                 <!-- 图片不能正确显示，待修复 -->
+                                <!-- <img alt="" class="img-circle" :src="$store.state.userInfo.portrait" /> </a> -->
                         </li>
+
                         <!-- END USER LOGIN DROPDOWN -->
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                         <li class="dropdown dropdown-extended quick-sidebar-toggler">
                             <span class="sr-only">Toggle Quick Sidebar</span>
-                            <i class="icon-logout"></i>
+                            <i class="icon-logout"  @click="logout"></i>
                         </li>
                         <!-- END QUICK SIDEBAR TOGGLER -->
                     </ul>
@@ -116,7 +121,7 @@
             <i class="icon-arrow-up"></i>
         </div>
     </div>
-    <!-- END FOOTER --> 
+    <!-- END FOOTER -->
 </div>  
 </template>
 <script>
@@ -128,7 +133,7 @@
                 toggler: 0,
                 toggler1: 0,
                 subMenu: -1,
-                transitionName: 'fade'
+                transitionName: 'fade',
             };
         },
         methods: {
@@ -156,7 +161,15 @@
             autoHegiht () {
                 let contentHeight = this.$refs.offsetTop - this.$refs.header.offsetHeight;
                 this.$refs.content.style.minHeight = contentHeight + 'px';
-            }
+            },
+    logout(){
+      //删除cookie并跳到登录页
+      this.delCookie('session');
+      //演示
+      setTimeout(()=>{
+        this.$router.push('/login/');
+      },1000)
+    }
         },
         transitions: {
             'fade': {

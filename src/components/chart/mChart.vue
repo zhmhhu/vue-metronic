@@ -24,7 +24,7 @@
             }
         },
         methods: {
-            beforeCreate () {
+            init () {
                 var myChart = echarts.init(this.$refs.echarts);
                 // 绘制图表
                 window.console.log(this.option);

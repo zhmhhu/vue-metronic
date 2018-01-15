@@ -1,4 +1,4 @@
-import App from './App';
+import App from './App'
 import ExampleButton from './example/example_button';
 import ExampleAlert from './example/example_alert';
 import ExamplePortlet from './example/example_portlet';
@@ -11,14 +11,20 @@ import ExampleChart from './example/example_chart';
 import ExampleCheckbox from './example/example_checkbox';
 import Doc from './example/doc.vue';
 
+import Login from './components/Login';
+import UserInfo from './components/UserInfo';
+
 export default [{
     path: '/',
     name: 'app',
     component: App,
-    children: [{
-        path: '/buttons',
-        component: ExampleButton
-    }]
+}, {
+    path: '/login',
+    name:"login",
+    component: Login
+}, {
+    path: '/user_info',
+    component: UserInfo
 }, {
     path: '/doc',
     name: 'doc',
